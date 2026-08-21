@@ -305,8 +305,8 @@
     <div class="cta-box">
       <h3>Zoom体験会で、あなたの選環を一緒に深掘りします</h3>
       <p>Zoom体験会では、診断だけでは見えない“あなたの選環”を一緒に深掘りします。今回の結果がどこから来て、どの場面で強く出るのか——その続きを、ここからひもといていきます。</p>
-      <div class="steps">体験会をご希望の方は、LINEに<br>「Zoom希望日時を3つ」送ってください。</div>
-      <a id="lineBtn" class="btn" href="#" target="_blank" rel="noopener">LINEで体験会に申し込む</a>
+      <div class="steps">下のボタンから、ご希望の日時を<br>カレンダーでお選びください。<br>ご予約と同時に、当日のZoom URLが自動で届きます。</div>
+      <a id="bookBtn" class="btn" href="#" target="_blank" rel="noopener">体験会に申し込む（日時を選ぶ）</a>
     </div>
 
     <p class="save-note" id="saveNote"></p>
@@ -321,9 +321,9 @@
    仕様書 Ver.1.0 準拠
    ========================================================= */
 
-/* ▼▼▼ 後で差し替える2箇所 ▼▼▼ */
+/* ▼▼▼ 設定値 ▼▼▼ */
 const GAS_URL  = "https://script.google.com/macros/s/AKfycbxNBXacdaDyD2RhSqofk1gFIhmnI5NpTH9Yppiv3obqAuzF2Dgai6BkemopU80JWdzR/exec"; // ビジネス版用の新しいGAS
-const LINE_URL = "https://lin.ee/7AwQfBEf";        // 結果画面から戻すLINE
+const BOOK_URL = "https://timerex.net/s/hinyarin1210_f06f/c3ae5a75"; // 体験会の予約ページ（TimeRex）
 /* ▲▲▲ ここだけ入れ替えればOK ▲▲▲ */
 
 // 7つの選環（定義）
@@ -537,10 +537,10 @@ function renderResult(R){
   }
   $("rDesc").textContent = desc;
 
-  // LINE
-  const line = $("lineBtn");
-  if(LINE_URL && LINE_URL.startsWith("http")){ line.href=LINE_URL; }
-  else { line.href="#"; line.addEventListener("click",e=>e.preventDefault(),{once:true}); }
+  // 予約ページ（体験会）
+  const book = $("bookBtn");
+  if(BOOK_URL && BOOK_URL.startsWith("http")){ book.href=BOOK_URL; }
+  else { book.href="#"; book.addEventListener("click",e=>e.preventDefault(),{once:true}); }
 
   $("saveNote").textContent = "";
   show(secResult);
