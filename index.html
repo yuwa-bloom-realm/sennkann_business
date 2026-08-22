@@ -3,19 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>選環診断〈ビジネス編〉</title>
+<title>なぜ、あなたはそこで止まっているの？ 21問「止まりポイント」診断</title>
 <style>
   :root{
-    --ink:#f3ecff;          /* 淡い星明かりの文字色 */
-    --ink-soft:#c9bde6;
-    --ink-dim:#9a8dc4;
-    --gold:#e7c976;         /* 金 */
-    --gold-soft:#c9a94e;
-    --violet:#6b4ea8;       /* 紫 */
-    --violet-deep:#3a2a63;
-    --bg0:#0d0a1f;          /* 深い夜空 */
-    --bg1:#140f2e;
-    --bg2:#1d1642;
+    --ink:#f3ecff; --ink-soft:#c9bde6; --ink-dim:#9a8dc4;
+    --gold:#e7c976; --gold-soft:#c9a94e;
+    --violet:#6b4ea8; --violet-deep:#3a2a63;
+    --bg0:#0d0a1f; --bg1:#140f2e; --bg2:#1d1642;
     --panel:rgba(30,22,66,0.72);
     --line:rgba(231,201,118,0.28);
     --serif:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
@@ -24,20 +18,15 @@
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{height:100%}
   body{
-    font-family:var(--serif);
-    color:var(--ink);
+    font-family:var(--serif); color:var(--ink);
     background:
       radial-gradient(1200px 700px at 50% -10%, #241a52 0%, transparent 60%),
       radial-gradient(900px 600px at 85% 15%, #2a1e5a 0%, transparent 55%),
       linear-gradient(180deg, var(--bg0) 0%, var(--bg1) 45%, var(--bg2) 100%);
-    background-attachment:fixed;
-    min-height:100vh;
-    line-height:1.85;
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
+    background-attachment:fixed; min-height:100vh; line-height:1.85;
+    -webkit-font-smoothing:antialiased; overflow-x:hidden;
   }
-  /* 星の層 */
-  .stars, .stars2{position:fixed;inset:0;pointer-events:none;z-index:0}
+  .stars,.stars2{position:fixed;inset:0;pointer-events:none;z-index:0}
   .stars{background-image:
     radial-gradient(1.4px 1.4px at 20% 30%, rgba(255,255,255,0.9), transparent),
     radial-gradient(1.2px 1.2px at 70% 20%, rgba(231,201,118,0.9), transparent),
@@ -55,172 +44,123 @@
   @keyframes twinkle{0%,100%{opacity:.55}50%{opacity:1}}
 
   .wrap{position:relative;z-index:1;max-width:680px;margin:0 auto;padding:clamp(20px,5vw,48px) clamp(16px,4vw,28px) 80px}
-
-  /* 共通パネル */
   .panel{
-    background:var(--panel);
-    border:1px solid var(--line);
-    border-radius:20px;
-    padding:clamp(24px,5vw,40px);
-    backdrop-filter:blur(6px);
+    background:var(--panel); border:1px solid var(--line); border-radius:20px;
+    padding:clamp(24px,5vw,40px); backdrop-filter:blur(6px);
     box-shadow:0 20px 60px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.04);
   }
-
-  /* 表紙 */
-  .eyebrow{font-family:var(--sans);font-size:.72rem;letter-spacing:.42em;color:var(--gold-soft);text-align:center;margin-bottom:20px;text-transform:uppercase}
+  .eyebrow{font-family:var(--sans);font-size:.72rem;letter-spacing:.38em;color:var(--gold-soft);text-align:center;margin-bottom:20px;text-transform:uppercase}
   .cover-title{
-    font-size:clamp(2rem,8vw,3.1rem);
-    text-align:center;
-    font-weight:600;
-    letter-spacing:.06em;
-    line-height:1.35;
+    font-size:clamp(1.6rem,6vw,2.4rem); text-align:center; font-weight:600;
+    letter-spacing:.04em; line-height:1.5;
     background:linear-gradient(180deg,#fff 0%, var(--gold) 130%);
     -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-    margin-bottom:6px;
+    margin-bottom:8px;
   }
-  .cover-sub{text-align:center;font-family:var(--sans);font-size:.82rem;letter-spacing:.28em;color:var(--ink-soft);margin-bottom:28px}
-  .divider{display:flex;align-items:center;justify-content:center;gap:14px;margin:26px 0}
+  .cover-sub{text-align:center;font-family:var(--sans);font-size:.86rem;letter-spacing:.14em;color:var(--ink-soft);margin-bottom:24px;line-height:1.9}
+  .divider{display:flex;align-items:center;justify-content:center;gap:14px;margin:24px 0}
   .divider::before,.divider::after{content:"";height:1px;width:70px;background:linear-gradient(90deg,transparent,var(--gold-soft),transparent)}
   .divider span{color:var(--gold);font-size:.9rem}
-  .lead{font-size:1rem;color:var(--ink-soft);text-align:center;margin:0 auto 8px;max-width:34em}
+  .lead{font-size:1rem;color:var(--ink-soft);text-align:center;margin:0 auto 14px;max-width:34em}
   .lead strong{color:var(--gold);font-weight:600}
+  .target{font-family:var(--sans);font-size:.82rem;color:var(--ink-dim);text-align:center;line-height:1.8;margin-top:8px;padding:14px 16px;background:rgba(13,10,31,0.4);border-radius:10px}
 
-  .field{margin-top:30px}
+  .field{margin-top:28px}
   .field label{display:block;font-family:var(--sans);font-size:.9rem;color:var(--ink);margin-bottom:6px;letter-spacing:.04em}
   .field .hint{font-family:var(--sans);font-size:.75rem;color:var(--ink-dim);margin-bottom:12px;line-height:1.6}
   input[type=text]{
-    width:100%;padding:15px 18px;border-radius:12px;
-    background:rgba(13,10,31,0.6);
-    border:1px solid var(--line);
-    color:var(--ink);font-family:var(--serif);font-size:1.05rem;
+    width:100%;padding:15px 18px;border-radius:12px;background:rgba(13,10,31,0.6);
+    border:1px solid var(--line);color:var(--ink);font-family:var(--serif);font-size:1.05rem;
     outline:none;transition:border-color .25s, box-shadow .25s;
   }
   input[type=text]:focus{border-color:var(--gold-soft);box-shadow:0 0 0 3px rgba(231,201,118,0.14)}
   input[type=text]::placeholder{color:var(--ink-dim)}
 
   .btn{
-    display:block;width:100%;margin-top:28px;
-    padding:17px 20px;border:none;border-radius:14px;cursor:pointer;
-    font-family:var(--sans);font-size:1.02rem;font-weight:600;letter-spacing:.14em;
-    color:#231a10;
+    display:block;width:100%;margin-top:26px;padding:17px 20px;border:none;border-radius:14px;cursor:pointer;
+    font-family:var(--sans);font-size:1.02rem;font-weight:600;letter-spacing:.12em;color:#231a10;
     background:linear-gradient(135deg,#f3dd98 0%, var(--gold) 45%, var(--gold-soft) 100%);
     box-shadow:0 12px 30px rgba(201,169,78,0.35), inset 0 1px 0 rgba(255,255,255,0.5);
-    transition:transform .18s ease, box-shadow .25s ease, opacity .2s;
+    transition:transform .18s ease, box-shadow .25s ease, opacity .2s; text-align:center; text-decoration:none;
   }
   .btn:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(201,169,78,0.45)}
   .btn:active{transform:translateY(0)}
   .btn:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
-  .btn-ghost{
-    background:transparent;color:var(--ink-soft);
-    border:1px solid var(--line);box-shadow:none;
-  }
+  .btn-ghost{background:transparent;color:var(--ink-soft);border:1px solid var(--line);box-shadow:none}
   .btn-ghost:hover{border-color:var(--gold-soft);color:var(--ink);box-shadow:none}
-
   .err{font-family:var(--sans);font-size:.82rem;color:#f0a6b8;margin-top:10px;min-height:1.2em;text-align:center}
 
-  /* 進捗 */
   .progress-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;font-family:var(--sans)}
   .progress-head .q-count{font-size:.8rem;letter-spacing:.2em;color:var(--gold-soft)}
   .progress-head .q-count b{color:var(--gold);font-size:1.15rem}
   .bar{height:4px;border-radius:99px;background:rgba(255,255,255,0.08);overflow:hidden;margin-bottom:30px}
-  .bar > i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--violet),var(--gold));transition:width .45s cubic-bezier(.4,0,.2,1)}
+  .bar>i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--violet),var(--gold));transition:width .45s cubic-bezier(.4,0,.2,1)}
 
-  .qtext{font-size:clamp(1.12rem,4.6vw,1.4rem);line-height:1.75;letter-spacing:.02em;margin-bottom:30px;min-height:3em}
   .qnum{display:inline-block;font-family:var(--sans);font-size:.72rem;letter-spacing:.3em;color:var(--gold-soft);margin-bottom:14px}
-
+  .qtext{font-size:clamp(1.12rem,4.6vw,1.38rem);line-height:1.8;letter-spacing:.02em;margin-bottom:30px;min-height:3.4em}
   .choices{display:flex;flex-direction:column;gap:12px}
   .choice{
-    display:flex;align-items:center;gap:16px;
-    padding:16px 18px;border-radius:13px;cursor:pointer;
-    background:rgba(13,10,31,0.5);
-    border:1px solid var(--line);
+    display:flex;align-items:center;gap:16px;padding:16px 18px;border-radius:13px;cursor:pointer;
+    background:rgba(13,10,31,0.5);border:1px solid var(--line);
     font-family:var(--sans);font-size:1rem;color:var(--ink-soft);
     transition:border-color .2s, background .2s, transform .12s, color .2s;
   }
   .choice:hover{border-color:var(--gold-soft);background:rgba(58,42,99,0.4);color:var(--ink);transform:translateX(3px)}
   .choice .mark{
-    flex:0 0 auto;width:34px;height:34px;border-radius:50%;
-    display:grid;place-items:center;
-    border:1px solid var(--gold-soft);color:var(--gold);
-    font-family:var(--serif);font-size:1rem;background:rgba(231,201,118,0.06);
-    transition:background .2s,color .2s;
+    flex:0 0 auto;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;
+    border:1px solid var(--gold-soft);color:var(--gold);font-family:var(--serif);font-size:.95rem;
+    background:rgba(231,201,118,0.06);transition:background .2s,color .2s;
   }
   .choice:hover .mark{background:var(--gold);color:#231a10}
-
   .nav{display:flex;gap:12px;margin-top:26px}
   .nav .btn{margin-top:0;flex:1}
 
-  /* 計算中 */
   .calc{text-align:center;padding:40px 0}
   .calc .orbit{width:70px;height:70px;margin:0 auto 24px;position:relative}
   .calc .orbit::before{content:"";position:absolute;inset:0;border-radius:50%;border:1px solid var(--line);border-top-color:var(--gold);animation:spin 1.1s linear infinite}
   .calc .orbit::after{content:"✦";position:absolute;inset:0;display:grid;place-items:center;color:var(--gold);font-size:1.3rem}
   @keyframes spin{to{transform:rotate(360deg)}}
 
-  /* 結果 */
-  .result-eyebrow{font-family:var(--sans);font-size:.74rem;letter-spacing:.34em;color:var(--gold-soft);text-align:center;margin-bottom:18px}
-  .rank{margin:22px 0}
-  .rank-label{font-family:var(--sans);font-size:.76rem;letter-spacing:.24em;color:var(--ink-dim);margin-bottom:6px}
-  .rank-name{
-    font-size:clamp(1.4rem,6vw,1.95rem);letter-spacing:.04em;line-height:1.4;
-    color:var(--gold);font-weight:600;
-  }
-  .rank.second .rank-name{font-size:clamp(1.2rem,5vw,1.6rem);color:#d9c48f}
-  .rank-strength{font-family:var(--sans);font-size:.76rem;color:var(--ink-dim);margin-top:4px;letter-spacing:.04em}
-  .result-desc{font-size:1.02rem;color:var(--ink-soft);margin:26px 0 6px;line-height:1.9}
-  .insight{
-    margin:34px 0 30px;
-    padding:30px 26px;
-    border-radius:16px;
-    text-align:center;
-    background:
-      radial-gradient(120% 100% at 50% 0%, rgba(231,201,118,0.10), transparent 70%),
-      rgba(13,10,31,0.42);
-    border:1px solid var(--line);
-    position:relative;
-  }
-  .insight::before, .insight::after{
-    content:"✦";color:var(--gold-soft);font-size:.85rem;
-    position:absolute;top:16px;opacity:.7;
-  }
-  .insight::before{left:20px}
-  .insight::after{right:20px}
-  .insight-lead{
-    font-size:clamp(1.14rem,4.6vw,1.45rem);
-    line-height:1.65;letter-spacing:.02em;
-    color:var(--ink);font-weight:600;
-    margin-bottom:18px;
-  }
-  .insight-lead em{
-    font-style:normal;color:var(--gold);
-    padding:0 .1em;
-    border-bottom:1px solid var(--gold-soft);
-  }
-  .insight-body{
-    font-size:.98rem;color:var(--ink-soft);line-height:1.95;
-    max-width:30em;margin:0 auto;
-  }
-  .insight-body + .insight-body{margin-top:12px}
-  .insight-body em{font-style:normal;color:var(--gold);font-weight:600}
-  .cta-box{
-    margin-top:30px;padding:26px 22px;border-radius:16px;
-    background:linear-gradient(160deg, rgba(107,78,168,0.32), rgba(58,42,99,0.24));
+  .result-eyebrow{font-family:var(--sans);font-size:.74rem;letter-spacing:.3em;color:var(--gold-soft);text-align:center;margin-bottom:14px}
+  .r-title{font-size:clamp(1.5rem,6vw,2.1rem);text-align:center;color:var(--gold);font-weight:600;letter-spacing:.03em;line-height:1.45;margin:6px 0 4px}
+  .r-title small{display:block;font-size:.8rem;font-family:var(--sans);color:var(--ink-soft);letter-spacing:.14em;margin-bottom:8px;font-weight:400}
+  .r-strength{font-family:var(--sans);font-size:.76rem;color:var(--ink-dim);text-align:center;letter-spacing:.04em;margin-bottom:4px}
+  .r-summary{font-size:1.04rem;color:var(--ink-soft);line-height:1.95;margin:24px 0 6px;text-align:center}
+
+  .r-block{margin:26px 0}
+  .r-block h3{font-family:var(--sans);font-size:.82rem;letter-spacing:.16em;color:var(--gold);margin-bottom:12px;padding-left:14px;border-left:2px solid var(--gold-soft)}
+  .r-block p{font-size:.98rem;color:var(--ink-soft);line-height:1.95}
+  .r-quotes{display:flex;flex-direction:column;gap:8px}
+  .r-quote{font-family:var(--serif);font-size:.98rem;color:var(--ink);background:rgba(13,10,31,0.4);border-radius:10px;padding:11px 16px;line-height:1.7}
+  .r-quote::before{content:"“";color:var(--gold-soft);margin-right:4px}
+  .r-quote::after{content:"”";color:var(--gold-soft);margin-left:2px}
+
+  .cause{
+    margin:30px 0;padding:26px 22px;border-radius:16px;text-align:left;position:relative;
+    background:radial-gradient(120% 100% at 50% 0%, rgba(231,201,118,0.10), transparent 70%), rgba(13,10,31,0.42);
     border:1px solid var(--line);
   }
-  .cta-box h3{font-size:1.15rem;color:var(--gold);letter-spacing:.04em;margin-bottom:12px;text-align:center;font-weight:600}
-  .cta-box p{font-size:.94rem;color:var(--ink-soft);line-height:1.9;margin-bottom:6px}
-  .cta-box .steps{font-family:var(--sans);font-size:.9rem;color:var(--ink);background:rgba(13,10,31,0.4);border-radius:10px;padding:14px 16px;margin:16px 0 4px;letter-spacing:.02em}
+  .cause::before,.cause::after{content:"✦";color:var(--gold-soft);font-size:.8rem;position:absolute;top:14px;opacity:.7}
+  .cause::before{left:18px}.cause::after{right:18px}
+  .cause .lead2{font-size:1.06rem;color:var(--ink);font-weight:600;line-height:1.7;margin:6px 0 14px;text-align:center}
+  .cause .lead2 em{font-style:normal;color:var(--gold);padding:0 .1em;border-bottom:1px solid var(--gold-soft)}
+  .cause p{font-size:.96rem;color:var(--ink-soft);line-height:1.95;margin-bottom:8px}
+
+  .step{margin:26px 0;padding:20px 20px;border-radius:14px;background:linear-gradient(160deg, rgba(107,78,168,0.24), rgba(58,42,99,0.18));border:1px solid var(--line)}
+  .step h3{font-family:var(--sans);font-size:.82rem;letter-spacing:.16em;color:var(--gold);margin-bottom:10px}
+  .step p{font-size:.98rem;color:var(--ink-soft);line-height:1.95}
+
+  .cta-box{margin-top:30px;padding:26px 22px;border-radius:16px;background:linear-gradient(160deg, rgba(107,78,168,0.32), rgba(58,42,99,0.24));border:1px solid var(--line)}
+  .cta-box h3{font-size:1.12rem;color:var(--gold);letter-spacing:.03em;margin-bottom:12px;text-align:center;font-weight:600}
+  .cta-box p{font-size:.95rem;color:var(--ink-soft);line-height:1.95;margin-bottom:6px}
+  .cta-box .future{font-size:.98rem;color:var(--ink);line-height:1.95;margin:14px 0 4px;text-align:center}
+  .cta-box .future em{font-style:normal;color:var(--gold);font-weight:600}
 
   .save-note{font-family:var(--sans);font-size:.72rem;color:var(--ink-dim);text-align:center;margin-top:22px;line-height:1.7}
-
   .fade{animation:fade .5s ease both}
   @keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
-
   .hidden{display:none !important}
-
-  @media (prefers-reduced-motion: reduce){
-    *{animation:none !important;transition:none !important}
-  }
+  @media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important}}
 </style>
 </head>
 <body>
@@ -229,84 +169,81 @@
 
 <div class="wrap">
 
-  <!-- ============ 表紙 ============ -->
   <section id="cover" class="panel fade">
-    <div class="eyebrow">Senkan Business Diagnosis</div>
-    <h1 class="cover-title">選環診断<br>〈ビジネス編〉</h1>
-    <p class="cover-sub">あなたのビジネスを止めている“いつもの選び方”</p>
-
+    <div class="eyebrow">Senkan Business</div>
+    <h1 class="cover-title">なぜ、あなたは<br>そこで止まっているの？</h1>
+    <p class="cover-sub">21問「止まりポイント」診断</p>
     <div class="divider"><span>✦</span></div>
-
-    <p class="lead">スキルはある。知識もある。それなのに、<strong>有料で・高い価格で届ける</strong>場面になると、なぜか手が止まる。</p>
-    <p class="lead">その「止まり方」には、あなたが無意識にくり返している<strong>いつもの選び方＝選環</strong>が隠れています。</p>
-
+    <p class="lead">頑張っている。学んでもいる。人の役にも立ちたい。<br>なのに、なぜか同じところで止まってしまう。</p>
+    <p class="lead">それは<strong>「売るのが苦手」「発信が苦手」「自信がない」</strong>だけが原因とは限りません。</p>
+    <p class="lead">21問で、今のあなたがどこで止まりやすいのか、そしてその少し手前に何が隠れているのかを見ていきます。</p>
+    <p class="target">占い師・カウンセラー・セラピストなど、<br>人を支える仕事をしている方へ</p>
     <div class="field">
       <label for="name">LINEで使用しているお名前</label>
-      <p class="hint">Zoom体験会のご連絡・診断結果との照合に使用します。</p>
+      <p class="hint">診断結果との照合・ご連絡に使用します。</p>
       <input type="text" id="name" placeholder="例）ゆわ" autocomplete="off">
       <div class="err" id="nameErr"></div>
     </div>
-
     <button class="btn" id="startBtn">診断をはじめる（全21問）</button>
   </section>
 
-  <!-- ============ 設問 ============ -->
   <section id="quiz" class="panel hidden">
     <div class="progress-head">
       <span class="q-count"><b id="qNow">1</b> / 21</span>
       <span class="q-count" id="qKind">回答してください</span>
     </div>
     <div class="bar"><i id="barFill"></i></div>
-
     <div id="qBody">
       <span class="qnum" id="qNum">Q1</span>
       <p class="qtext" id="qText"></p>
       <div class="choices" id="choices"></div>
     </div>
-
     <div class="nav">
       <button class="btn btn-ghost" id="backBtn">もどる</button>
     </div>
   </section>
 
-  <!-- ============ 計算中 ============ -->
   <section id="calc" class="panel hidden">
     <div class="calc">
       <div class="orbit"></div>
-      <p style="color:var(--ink-soft);font-family:var(--sans);letter-spacing:.1em">あなたの選環を読み解いています…</p>
+      <p style="color:var(--ink-soft);font-family:var(--sans);letter-spacing:.1em">あなたの止まりポイントを読み解いています…</p>
     </div>
   </section>
 
-  <!-- ============ 結果 ============ -->
   <section id="result" class="panel hidden">
-    <div class="result-eyebrow">あなたに今、強く出ている選環</div>
+    <div class="result-eyebrow">あなたの今の止まりポイントは…</div>
     <div class="divider"><span>✦</span></div>
+    <h2 class="r-title" id="rTitle"></h2>
+    <p class="r-strength" id="rStrength"></p>
+    <p class="r-summary" id="rSummary"></p>
 
-    <div class="rank first">
-      <div class="rank-label">第一の選環</div>
-      <div class="rank-name" id="r1name"></div>
-      <div class="rank-strength" id="r1str"></div>
+    <div class="r-block">
+      <h3>こんな言葉が浮かびやすい</h3>
+      <div class="r-quotes" id="rQuotes"></div>
+    </div>
+    <div class="r-block">
+      <h3>今、起きていること</h3>
+      <p id="rHappening"></p>
     </div>
 
-    <div class="rank second" id="rank2wrap">
-      <div class="rank-label" id="r2label">第二の選環</div>
-      <div class="rank-name" id="r2name"></div>
-      <div class="rank-strength" id="r2str"></div>
+    <div class="cause hidden" id="causeBox">
+      <p class="lead2">今回、もうひとつ<br>見てほしいところがあります。</p>
+      <p id="causeText"></p>
+      <p>うまくいかない場所と、本当につまずいている場所は、同じとは限りません。</p>
+      <p>だから、今見えている苦手だけを頑張って直そうとしなくても大丈夫です。</p>
     </div>
 
-    <p class="result-desc" id="rDesc"></p>
-
-    <div class="insight">
-      <p class="insight-lead">ここで見えているのは、<br>あなたの選環の<em>一部分</em>です</p>
-      <p class="insight-body">同じ結果でも、なぜその選環が起きるのか、どの場面で強く出るのかは、人によって違います。</p>
-      <p class="insight-body">そして実は、今回の結果にはまだ表れていない<em>“別の選環”</em>が隠れていることもあります。</p>
+    <div class="step">
+      <h3>まず、最初の一歩</h3>
+      <p id="rStep"></p>
     </div>
 
     <div class="cta-box">
-      <h3>Zoom体験会で、あなたの選環を一緒に深掘りします</h3>
-      <p>Zoom体験会では、診断だけでは見えない“あなたの選環”を一緒に深掘りします。今回の結果がどこから来て、どの場面で強く出るのか——その続きを、ここからひもといていきます。</p>
-      <div class="steps">下のボタンから、ご希望の日時を<br>カレンダーでお選びください。<br>ご予約と同時に、当日のZoom URLが自動で届きます。</div>
-      <a id="bookBtn" class="btn" href="#" target="_blank" rel="noopener">体験会に申し込む（日時を選ぶ）</a>
+      <h3>もっと「私の場合」を見てみたい方へ</h3>
+      <p>診断は、答えを決めつけるためのものではありません。ここで見えたのは、今のあなたの“現在地”です。</p>
+      <p class="future" id="rFuture"></p>
+      <p>「私の場合は、どこから整えればいい？」——その続きを、体験会で一緒に整理していきます。</p>
+      <a id="bookBtn" class="btn" href="#" target="_blank" rel="noopener">体験会の日程を見る</a>
     </div>
 
     <p class="save-note" id="saveNote"></p>
@@ -316,93 +253,101 @@
 </div>
 
 <script>
-/* =========================================================
-   選環診断〈ビジネス編〉 — ロジック
-   仕様書 Ver.1.0 準拠
-   ========================================================= */
+/* 選環ビジネス編｜21問「止まりポイント」診断 / 仕様書 kuroppi_senkan_spec 準拠 */
 
-/* ▼▼▼ 設定値 ▼▼▼ */
-const GAS_URL  = "https://script.google.com/macros/s/AKfycbxNBXacdaDyD2RhSqofk1gFIhmnI5NpTH9Yppiv3obqAuzF2Dgai6BkemopU80JWdzR/exec"; // ビジネス版用の新しいGAS
-const BOOK_URL = "https://timerex.net/s/hinyarin1210_f06f/c3ae5a75"; // 体験会の予約ページ（TimeRex）
+/* ▼▼▼ 設定値（既存を引き継ぎ）▼▼▼ */
+const GAS_URL  = "https://script.google.com/macros/s/AKfycbxNBXacdaDyD2RhSqofk1gFIhmnI5NpTH9Yppiv3obqAuzF2Dgai6BkemopU80JWdzR/exec";
+const BOOK_URL = "https://timerex.net/s/hinyarin1210_f06f/c3ae5a75";
 /* ▲▲▲ ここだけ入れ替えればOK ▲▲▲ */
 
-// 7つの選環（定義）
-const SENKAN = {
-  1:{name:"価値を小さくする選環", theme:"「私のやっていることに、そこまでの価値はないかもしれない」",
-     desc:"自分の提供しているものの価値を、実際より小さく見積もりやすい傾向が見えています。",
-     qs:[1,8,15]},
-  2:{name:"比べて止まる選環", theme:"「もっとすごい人がいる。私はまだそこまでじゃない」",
-     desc:"自分より活躍している人と比べて、行動が止まりやすい傾向が見えています。",
-     qs:[2,9,16]},
-  3:{name:"完璧になるまで出せない選環", theme:"「もっと整ってからじゃないと出してはいけない」",
-     desc:"商品が形になっても、まだ足りないと感じて世に出すのを先延ばししやすい傾向が見えています。",
-     qs:[3,10,17]},
-  4:{name:"売ることを避ける選環", theme:"「売ったら嫌われるかもしれない」",
-     desc:"提案や案内を「売り込み」と感じてしまい、自分から動きにくくなる傾向が見えています。",
-     qs:[4,11,18]},
-  5:{name:"受け取ることを遠慮する選環", theme:"「私がそんなに受け取っていいの？」",
-     desc:"高い金額を受け取る場面で、遠慮が出やすい傾向が見えています。",
-     qs:[5,12,19]},
-  6:{name:"責任を背負いすぎる選環", theme:"「この人の結果まで、私が背負わなければならない」",
-     desc:"お客様の結果まで自分が背負おうとして、身動きが取りにくくなる傾向が見えています。",
-     qs:[6,13,20]},
-  7:{name:"また学びに戻る選環", theme:"「今の自分には、まだ何かが足りない」",
-     desc:"自信がゆらぐと、売るより先に「もっと学ぼう」と学びに戻りやすい傾向が見えています。",
-     qs:[7,14,21]},
+const CATS = {
+  A:{stage:1, name:"自分軸ストップ", qs:[1,9,17],
+     summary:"相手のためを優先するほど、自分の価値や『私はこれでいい』が後ろに下がりやすいタイプ。",
+     quotes:["私なんかが","もっと実績がついてから","まだ人に勧めるほどじゃない"],
+     happening:"能力が足りないというより、自分の価値を自分で受け取る前に、相手基準で判断してしまっていること。",
+     step:"『誰に、どんな変化を届けたいか』と『自分がすでに渡せる価値』を、言葉にしてみましょう。"},
+  B:{stage:2, name:"未来ぼんやりストップ", qs:[6,11,18],
+     summary:"知識や技術はあるのに、『受けた人がどう変わるのか』が言葉になり切らず、商品や発信がぼやけやすいタイプ。",
+     quotes:["できることは多いけど、何を商品にすれば？","結局、何を売ってる人なんだろう"],
+     happening:"専門性が足りないのではなく、相手が手に入れる未来が、見える形になっていないこと。",
+     step:"サービス内容ではなく『受けた後の日常・感情・行動の変化』から、逆に整理してみましょう。"},
+  C:{stage:3, name:"商品化ストップ", qs:[3,8,15],
+     summary:"無料相談や単発対応ならできるのに、継続商品・高額商品として形にすると急に手が止まりやすいタイプ。",
+     quotes:["これでお金をもらっていいの？","高額にするほどの内容かな","何をどこまで入れれば？"],
+     happening:"内容が足りないのではなく、価値を『変化のプロセス』として商品にまとめる視点が、まだ弱いこと。",
+     step:"ノウハウの量ではなく、現在地→変化→ゴールまでの段階を、3〜5ステップで並べてみましょう。"},
+  D:{stage:4, name:"受け取りストップ", qs:[5,12,19],
+     summary:"相手を助けることはできるのに、価格をつけたりお金を受け取る段階で、罪悪感や申し訳なさが出やすいタイプ。",
+     quotes:["困っている人からそんなにもらえない","高いと思われたくない","無料なら気楽なのに"],
+     happening:"優しすぎるからダメなのではなく、『お金を受け取る＝奪う』に近い感覚が、混ざりやすいこと。",
+     step:"価格ではなく、相手が受け取る変化・サポート量・伴走期間を、分けて見直してみましょう。"},
+  E:{stage:5, name:"発信ストップ", qs:[4,13,20],
+     summary:"言いたいことはあるのに、SNSになると一般論・無難な言葉になったり、投稿自体が止まりやすいタイプ。",
+     quotes:["こんなこと書いていい？","誰かに否定されたら","何を投稿すればいいか分からない"],
+     happening:"文章力の問題だけではなく、『誰に何を感じてほしいか』より、正しさを優先しやすいこと。",
+     step:"教える投稿より、見てきた悩み・自分の経験・相手の未来の3つから、1つ選んで書いてみましょう。"},
+  F:{stage:6, name:"案内ストップ", qs:[2,10,16],
+     summary:"相談や体験では喜んでもらえるのに、その後の商品案内になると言葉が弱くなったり、相手任せになりやすいタイプ。",
+     quotes:["売り込んでると思われたくない","必要なら向こうから言ってくれるはず","どうぞ、で止まる"],
+     happening:"営業力不足ではなく、相手の『私にできるかな』という最後の不安に、伴走を見せ切れていないこと。",
+     step:"『買ってください』ではなく『ここから一緒に進むなら、こう支えます』を、言葉にしてみましょう。"},
+  G:{stage:7, name:"伴走ストップ", qs:[7,14,21],
+     summary:"商品はあるものの、『一緒にやると何が違うのか』が伝わりにくく、価格や継続の価値を出し切れないタイプ。",
+     quotes:["教える内容はあるけど、ずっと一緒にやる意味って？","私が先生にならなきゃ"],
+     happening:"知識不足ではなく、教えることに寄りすぎて『伴走される安心』が、商品価値として見えにくいこと。",
+     step:"教える内容ではなく、つまずいた時にどう支えるか・何を一緒に決めるかを、具体化してみましょう。"},
 };
 
-// 21問（正式版）
-const QUESTIONS = [
-  "相談や鑑定で相手に喜んでもらえても、「これくらいなら他の人でもできる」と思ってしまうことがある。",
-  "自分より経験や実績のある同業者を見ると、「私がこの金額をもらうのはまだ早い」と感じる。",
-  "商品を作るとき、「この金額をつけるなら、もっと内容を増やさなければ」と思う。",
-  "自分の商品を案内するとき、「売り込みだと思われたら嫌だな」と気になる。",
-  "自分のサービスで何十万円という金額を受け取ることを想像すると、少し落ち着かない気持ちになる。",
-  "高額商品を提供することを考えると、「もし相手が期待した結果にならなかったら」と不安になる。",
-  "自信がなくなったとき、新しい資格・講座・ノウハウを学べば、もっと売れるようになる気がする。",
-  "自分の商品に価格をつけるとき、「私のサービスにはこれだけの価値がある」と言い切ることに抵抗がある。",
-  "同業者の商品や価格を見ると、自分の商品や価格を変えた方がいいような気がしてくる。",
-  "商品がほぼ完成していても、「まだ足りないところがある」と募集を延期することがある。",
-  "無料相談・無料鑑定・体験会では自然に話せるのに、有料商品の案内になると急に話しにくくなる。",
-  "本当はもう少し高い価格にしたくても、「このくらいなら払ってもらえそう」という金額を選ぶことがある。",
-  "お客様が思うように変化できなかったとき、自分の力不足なのではないかと強く感じやすい。",
-  "今の商品を売ることより、「もう少し勉強してから売ろう」と考えている方が安心する。",
-  "お客様から良い感想や感謝をもらっても、「たまたまうまくいっただけかもしれない」と思うことがある。",
-  "自分より活躍している人を見ると、自分にはまだ経験や実績が足りないと感じて行動が止まりやすい。",
-  "商品を公開したあとでも、内容・価格・見せ方が気になって何度も作り直したくなる。",
-  "無料相談や体験会の最後に、相手から聞かれなければ、自分から有料商品を提案しないことがある。",
-  "高い金額を受け取るなら、その金額以上のことを返さなければ申し訳ないと感じる。",
-  "商品を提案するとき、相手のお金の事情まで想像して「無理に勧めない方がいい」と自分から引いてしまうことがある。",
-  "思うように売れない時期が続くと、今の商品を届け続けるより、新しいやり方や学びを探したくなる。",
-];
+const QUESTIONS = {
+  1:"人にサービスを勧めようとすると「私なんかが」と一歩引いてしまうことがある。",
+  2:"相談や体験で相手が喜んでくれても、その先の商品を案内するのをためらう。",
+  3:"無料なら自然にできるのに、有料の商品としてまとめようとすると手が止まる。",
+  4:"発信しようとすると、何を書けばいいか分からなくなったり、無難な内容になりやすい。",
+  5:"価格を伝える瞬間に、申し訳なさや罪悪感が出ることがある。",
+  6:"自分のサービスを受けると『相手がどう変わるのか』を、一言で説明するのが難しい。",
+  7:"商品内容は説明できても『私と一緒に進む価値』を伝えるのは難しいと感じる。",
+  8:"高額・継続商品を考えると『そこまでの内容があるかな』と不安になる。",
+  9:"実績や資格がもっと増えないと、自信を持って提供できない気がする。",
+  10:"相手が興味を示していても、最後は『必要ならどうぞ』と相手任せになりやすい。",
+  11:"できることが多すぎて、誰に何を届けるサービスなのか絞れなくなることがある。",
+  12:"値段を上げるくらいなら、自分が少し我慢した方がいいと思うことがある。",
+  13:"役立つことを書こうとするほど、誰に向けた投稿なのか分からなくなることがある。",
+  14:"サポートでは『ちゃんと教えなきゃ』という気持ちが強くなりやすい。",
+  15:"単発の相談はできても、数週間〜数か月のサポートの流れを作るのが難しい。",
+  16:"『一緒に進みましょう』より、説明や情報提供で終わってしまうことが多い。",
+  17:"人の良いところは見つけられるのに、自分の強みや価値はうまく言葉にできない。",
+  18:"商品内容を説明すると項目はたくさん出るが、相手が欲しい未来の説明は少なくなりやすい。",
+  19:"お金を受け取ると『これだけの価値を返さなきゃ』と急にプレッシャーが強くなる。",
+  20:"本当は伝えたい経験や考えがあっても、反応が怖くて出さないことがある。",
+  21:"相手が途中で迷ったり止まった時に、どう伴走するかを商品説明に入れていない。",
+};
 
-// 各設問がどの選環に属するか（Q番号 → 選環ID）
-const Q_TO_SENKAN = {};
-Object.entries(SENKAN).forEach(([id,v])=>v.qs.forEach(q=>Q_TO_SENKAN[q]=Number(id)));
+const Q2C={};
+Object.entries(CATS).forEach(([k,v])=>v.qs.forEach(q=>Q2C[q]=k));
+const QORDER = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21];
 
-// 選択肢（A〜D → 点数）
 const CHOICES = [
-  {m:"A", label:"とても当てはまる",      v:3},
-  {m:"B", label:"やや当てはまる",        v:2},
-  {m:"C", label:"あまり当てはまらない",  v:1},
-  {m:"D", label:"ほとんど当てはまらない",v:0},
+  {m:"◎", label:"とてもよくある", v:3},
+  {m:"○", label:"よくある",       v:2},
+  {m:"△", label:"たまにある",     v:1},
+  {m:"—", label:"ほとんどない",   v:0},
 ];
 
-// 複合ループ（内部分析用・画面には出さない）
-const COMPOUND = [
-  {key:"無料ループ",        members:[4,5,6]},
-  {key:"まだ足りないループ", members:[2,3,7]},
-  {key:"高額商品恐怖ループ", members:[1,5,6]},
-];
+const FUTURE = {
+  A:"自分の価値を、自分で受け取れるようになる。<em>「私なんて」が「これでいい」に変わって、心が軽くなります。</em>",
+  B:"届けたい相手とゴールが、はっきり見えてくる。<em>迷いが減って、自分に合った進め方が明確になります。</em>",
+  C:"今ある経験が、無理なく続けられる商品の形になる。<em>「これでいいの？」の不安が、静かにほどけていきます。</em>",
+  D:"自分も相手も苦しくならない受け取り方が見つかる。<em>お金を受け取ることへの罪悪感が、軽くなります。</em>",
+  E:"背伸びしない、あなたらしい発信軸が見えてくる。<em>「あなたから聞きたい」と、必要な人に届くようになります。</em>",
+  F:"押し売りせず、相手が安心して決められる案内ができる。<em>売り込まなくても、選ばれるようになります。</em>",
+  G:"『この人となら進めそう』と伝わる伴走の形が見える。<em>一緒に進む価値が、まっすぐ届くようになります。</em>",
+};
 
-// 状態
-const answers = new Array(21).fill(null); // 0..3
-let cur = 0;
-let userName = "";
-
-// DOM
 const $ = id => document.getElementById(id);
 const secCover=$("cover"), secQuiz=$("quiz"), secCalc=$("calc"), secResult=$("result");
+const answers = {};
+let orderIdx = 0;
+let userName = "";
 
 function show(sec){
   [secCover,secQuiz,secCalc,secResult].forEach(s=>s.classList.add("hidden"));
@@ -411,171 +356,118 @@ function show(sec){
   window.scrollTo({top:0,behavior:"smooth"});
 }
 
-/* ---------- 開始 ---------- */
 $("startBtn").addEventListener("click", ()=>{
-  const v = $("name").value.trim();
-  if(!v){ $("nameErr").textContent = "お名前を入力してください。"; return; }
-  $("nameErr").textContent = "";
-  userName = v;
-  cur = 0;
-  renderQuestion();
-  show(secQuiz);
+  const v=$("name").value.trim();
+  if(!v){ $("nameErr").textContent="お名前を入力してください。"; return; }
+  $("nameErr").textContent=""; userName=v; orderIdx=0;
+  renderQuestion(); show(secQuiz);
 });
 $("name").addEventListener("keydown", e=>{ if(e.key==="Enter") $("startBtn").click(); });
 
-/* ---------- 設問描画 ---------- */
 function renderQuestion(){
-  $("qNow").textContent = cur+1;
-  $("qNum").textContent = "Q"+(cur+1);
-  $("qText").textContent = QUESTIONS[cur];
-  $("barFill").style.width = ((cur)/21*100)+"%";
-  $("qKind").textContent = answers[cur]!==null ? "選択済み" : "回答してください";
-
-  const box = $("choices"); box.innerHTML="";
+  const qid = QORDER[orderIdx];
+  $("qNow").textContent = orderIdx+1;
+  $("qNum").textContent = "Q"+(orderIdx+1);
+  $("qText").textContent = QUESTIONS[qid];
+  $("barFill").style.width = (orderIdx/21*100)+"%";
+  $("qKind").textContent = (answers[qid]!==undefined) ? "選択済み" : "回答してください";
+  const box=$("choices"); box.innerHTML="";
   CHOICES.forEach(c=>{
     const b=document.createElement("button");
     b.className="choice";
     b.innerHTML=`<span class="mark">${c.m}</span><span>${c.label}</span>`;
-    if(answers[cur]===c.v){ b.style.borderColor="var(--gold)"; b.querySelector('.mark').style.background="var(--gold)"; b.querySelector('.mark').style.color="#231a10"; }
-    b.addEventListener("click", ()=>{
-      answers[cur]=c.v;
-      next();
-    });
+    if(answers[qid]===c.v){ b.style.borderColor="var(--gold)"; b.querySelector('.mark').style.background="var(--gold)"; b.querySelector('.mark').style.color="#231a10"; }
+    b.addEventListener("click", ()=>{ answers[qid]=c.v; next(); });
     box.appendChild(b);
   });
-
-  $("backBtn").style.visibility = cur===0 ? "hidden" : "visible";
-
-  const qbody=$("qBody"); qbody.classList.remove("fade"); void qbody.offsetWidth; qbody.classList.add("fade");
+  $("backBtn").style.visibility = orderIdx===0 ? "hidden" : "visible";
+  const qb=$("qBody"); qb.classList.remove("fade"); void qb.offsetWidth; qb.classList.add("fade");
 }
+function next(){ if(orderIdx<20){orderIdx++;renderQuestion();} else finish(); }
+$("backBtn").addEventListener("click", ()=>{ if(orderIdx>0){orderIdx--;renderQuestion();} });
 
-function next(){
-  if(cur < 20){ cur++; renderQuestion(); }
-  else { finish(); }
-}
-$("backBtn").addEventListener("click", ()=>{ if(cur>0){cur--;renderQuestion();} });
-
-/* ---------- 採点 ---------- */
+function count3(cat){ return CATS[cat].qs.filter(q=>answers[q]===3).length; }
 function score(){
-  const scores={};
-  Object.keys(SENKAN).forEach(id=>scores[id]=0);
-  answers.forEach((v,i)=>{ const sid=Q_TO_SENKAN[i+1]; scores[sid]+=v; });
-
-  // 順位付け
-  const ranked = Object.entries(scores)
-    .map(([id,s])=>({id:Number(id), s}))
-    .sort((a,b)=> b.s - a.s || a.id - b.id);
-
-  const top = ranked[0].s;
-  const tiedTop = ranked.filter(r=>r.s===top).map(r=>r.id);
-
-  // 1位・2位
-  const primary = ranked[0];
-  const secondScore = ranked.find(r=>r.s < ranked[0].s) ? Math.max(...ranked.filter(r=>r.s<ranked[0].s).map(r=>r.s)) : null;
-  let secondary=null, tieSecond=[];
-  if(tiedTop.length>=2){
-    // 1位が同点：2つを主要候補として保持
-    secondary = ranked[1];
-  } else if(secondScore!==null){
-    tieSecond = ranked.filter(r=>r.s===secondScore).map(r=>r.id);
-    secondary = ranked[1];
+  const s={}; Object.keys(CATS).forEach(k=>s[k]=0);
+  for(let q=1;q<=21;q++) s[Q2C[q]] += (answers[q]||0);
+  return s;
+}
+function judge(){
+  const s=score();
+  const ranked=Object.keys(CATS).slice().sort((a,b)=>{
+    if(s[b]!==s[a]) return s[b]-s[a];
+    const c3=count3(b)-count3(a); if(c3!==0) return c3;
+    return CATS[a].stage-CATS[b].stage;
+  });
+  const first=ranked[0], second=ranked[1];
+  const fStage=CATS[first].stage;
+  const earlier=Object.keys(CATS).filter(k=>CATS[k].stage<fStage);
+  let cause=null;
+  if(earlier.length){
+    earlier.sort((a,b)=> s[b]-s[a] || CATS[a].stage-CATS[b].stage);
+    if(s[earlier[0]]>0) cause=earlier[0];
   }
-
-  // 複合ループ候補（内部）：構成選環がいずれも3点以上のとき候補
-  const loops = COMPOUND.filter(L=> L.members.every(m=>scores[m]>=3)).map(L=>L.key);
-
-  return {scores, ranked, primary, secondary, tiedTop, tieSecond, loops};
+  const total=Object.values(s).reduce((a,b)=>a+b,0);
+  return {s,first,second,cause,total};
+}
+function strengthLabel(v){
+  if(v<=2) return "今はあまり強く出ていません";
+  if(v<=4) return "特定の場面で出やすい状態です";
+  if(v<=6) return "今のあなたに影響している可能性があります";
+  return "今、いちばん表に出やすい状態です";
 }
 
-function strengthLabel(s){
-  if(s<=2) return "現在はあまり強く出ていません";
-  if(s<=5) return "特定の場面で出やすい状態です";
-  if(s<=7) return "今のビジネスに影響している可能性があります";
-  return "主要な選環として強く出ている可能性が高いです";
-}
-
-/* ---------- 完了→結果 ---------- */
 function finish(){
   $("barFill").style.width="100%";
   show(secCalc);
-  const R = score();
-  sendToGAS(R); // 保存（失敗しても結果は表示する）
-  setTimeout(()=> renderResult(R), 1500);
+  const R=judge();
+  sendToGAS(R);
+  setTimeout(()=>renderResult(R), 1600);
 }
 
 function renderResult(R){
-  const p = SENKAN[R.primary.id];
-  $("r1name").textContent = "《"+p.name+"》";
-  $("r1str").textContent = strengthLabel(R.primary.s);
-
-  const tiedTop = R.tiedTop.length>=2;
-  if(tiedTop){
-    // 同点処理：2つの選環が同じ強さ
-    $("r2label").textContent = "同じ強さで出ている選環";
+  const c=CATS[R.first];
+  $("rTitle").innerHTML = `<small>あなたの今の止まりポイントは</small>「${c.name}」`;
+  $("rStrength").textContent = strengthLabel(R.s[R.first]);
+  $("rSummary").textContent = c.summary;
+  const q=$("rQuotes"); q.innerHTML="";
+  c.quotes.forEach(t=>{ const d=document.createElement("div"); d.className="r-quote"; d.textContent=t; q.appendChild(d); });
+  $("rHappening").textContent = c.happening;
+  if(R.cause){
+    const cc=CATS[R.cause];
+    $("causeBox").classList.remove("hidden");
+    $("causeText").innerHTML =
+      `あなたが今『ここで止まっている』と感じる場所より、その少し手前に <strong style="color:var(--gold)">「${cc.name}」</strong> が影響している可能性があります。`;
   } else {
-    $("r2label").textContent = "第二の選環";
+    $("causeBox").classList.add("hidden");
   }
-
-  if(R.secondary){
-    const s = SENKAN[R.secondary.id];
-    $("rank2wrap").classList.remove("hidden");
-    $("r2name").textContent = "《"+s.name+"》";
-    $("r2str").textContent = strengthLabel(R.secondary.s);
-  } else {
-    $("rank2wrap").classList.add("hidden");
-  }
-
-  // 短い説明（1位・2位を自然につなぐ / 出しすぎない）
-  let desc = p.desc;
-  if(R.secondary){
-    const s = SENKAN[R.secondary.id];
-    if(tiedTop){
-      desc = `いま、《${p.name}》と《${s.name}》が同じ強さで見えています。` + p.desc.replace(/。$/,"") + "。加えて、" + s.desc;
-    } else {
-      desc = p.desc.replace(/。$/,"") + "。さらに、" + s.desc;
-    }
-  }
-  $("rDesc").textContent = desc;
-
-  // 予約ページ（体験会）
-  const book = $("bookBtn");
+  $("rStep").textContent = c.step;
+  $("rFuture").innerHTML = FUTURE[R.first] || "";
+  const book=$("bookBtn");
   if(BOOK_URL && BOOK_URL.startsWith("http")){ book.href=BOOK_URL; }
   else { book.href="#"; book.addEventListener("click",e=>e.preventDefault(),{once:true}); }
-
-  $("saveNote").textContent = "";
+  $("saveNote").textContent="";
   show(secResult);
 }
 
-/* ---------- GAS送信 ---------- */
 function sendToGAS(R){
-  if(!GAS_URL || !GAS_URL.startsWith("http")) return; // 未設定なら送らない
-  const payload = {
-    line_name: userName,
-    answers: answers.reduce((o,v,i)=>{o["Q"+(i+1)]=v;return o;},{}),
-    scores: R.scores,
-    primary_senkan: SENKAN[R.primary.id].name,
-    secondary_senkan: R.secondary ? SENKAN[R.secondary.id].name : "",
-    tie_flags: {
-      top_tie: R.tiedTop.length>=2 ? R.tiedTop.map(id=>SENKAN[id].name) : [],
-      second_tie: R.tieSecond.length>=2 ? R.tieSecond.map(id=>SENKAN[id].name) : []
-    },
-    compound_loop_candidates: R.loops,
+  if(!GAS_URL || !GAS_URL.startsWith("http")) return;
+  const payload={
+    line_name:userName,
+    answers: QORDER.reduce((o,q)=>{o["Q"+q]=answers[q];return o;},{}),
+    cat_scores: R.s,
+    primary: CATS[R.first].name,
+    secondary: CATS[R.second].name,
+    cause: R.cause ? CATS[R.cause].name : "",
+    total: R.total,
     created_at: new Date().toISOString()
   };
-  // no-cors で投げっぱなし（GAS側は e.postData.contents をJSONで受ける）
-  fetch(GAS_URL,{
-    method:"POST",
-    mode:"no-cors",
-    headers:{"Content-Type":"text/plain;charset=utf-8"},
-    body:JSON.stringify(payload)
-  }).catch(()=>{ /* 失敗しても結果表示は続行 */ });
+  fetch(GAS_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)}).catch(()=>{});
 }
 
-/* ---------- やり直し ---------- */
 $("restartBtn").addEventListener("click", ()=>{
-  answers.fill(null); cur=0;
-  $("name").value=userName;
-  show(secCover);
+  for(const k in answers) delete answers[k];
+  orderIdx=0; $("name").value=userName; show(secCover);
 });
 </script>
 </body>
