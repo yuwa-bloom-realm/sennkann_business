@@ -131,9 +131,9 @@
         <div class="sub">累計の登録者</div>
       </div>
       <div class="kpi">
-        <div class="top"><span class="lbl">個別相談 予約</span><span class="badge soon">連携待ち</span></div>
-        <div class="num loading" id="s_book">—</div>
-        <div class="sub">TimeRex連携で自動</div>
+        <div class="top"><span class="lbl">個別相談 予約</span><span class="badge auto">自動</span></div>
+        <div class="num loading" id="s_book">…</div>
+        <div class="sub">TimeRex予約から自動</div>
       </div>
       <div class="kpi">
         <div class="top"><span class="lbl">申込</span><span class="badge soon">連携待ち</span></div>
@@ -181,7 +181,7 @@
         </div>
         <div class="funnel-step">
           <div class="fn-ic">📅</div>
-          <div class="fn-body"><div class="fn-name">個別相談 予約</div><div class="fn-num soon" id="f_book">連携待ち</div></div>
+          <div class="fn-body"><div class="fn-name">個別相談 予約</div><div class="fn-num" id="f_book">…</div></div>
         </div>
         <div class="funnel-step">
           <div class="fn-ic">🌱</div>
@@ -190,7 +190,7 @@
       </div>
     </div>
     <div class="foot-note">
-      <b>「自動」</b>＝診断データからリアルタイム表示中。<b>「連携待ち」</b>＝TimeRex・決済・アクセス解析をつなぐと、ここも自動で入ります（次のステップ）。
+      <b>「自動」</b>＝診断データ・TimeRex予約からリアルタイム表示中。<b>「連携待ち」</b>＝決済・アクセス解析をつなぐと、ここも自動で入ります（次のステップ）。
     </div>
     </div><!-- /view-dash -->
 
@@ -299,13 +299,15 @@
       set("s_mail",  s.email_count!=null?s.email_count:0);
       set("s_week",  s.week!=null?s.week:0);
       set("s_total", s.total!=null?s.total:0);
-      ["s_book","s_apply","s_pay","s_access"].forEach(id=>set(id,"—"));
+      set("s_book", s.reservation_total!=null?s.reservation_total:0);
+      ["s_apply","s_pay","s_access"].forEach(id=>set(id,"—"));
       $("updated").textContent = "最終更新 " + (s.updated_at||"-");
       $("hitokoto").innerHTML = hitokoto(s);
       $("f_shindan").textContent = (s.total!=null?s.total:0) + " 人";
       $("f_mail").textContent = (s.email_count!=null?s.email_count:0) + " 人";
       if((s.total||0)>0){ $("f_mail_rate").textContent = Math.round((s.email_count/s.total)*100)+"%"; }
       else { $("f_mail_rate").textContent = "—"; }
+      $("f_book").textContent = (s.reservation_total!=null?s.reservation_total:0) + " 人";
       const types = s.types_week || {};
       const entries = Object.entries(types).sort((a,b)=>b[1]-a[1]);
       const area = $("typesArea");
@@ -320,7 +322,7 @@
     }catch(err){
       $("updated").textContent = "読み込み失敗";
       $("hitokoto").innerHTML = "数字が取得できませんでした。更新を押してください🌙";
-      ["s_today","s_mail","s_week","s_total"].forEach(id=>{ const el=$(id); el.textContent="—"; el.classList.remove("loading"); });
+      ["s_today","s_mail","s_week","s_total","s_book"].forEach(id=>{ const el=$(id); el.textContent="—"; el.classList.remove("loading"); });
     }
   }
   $("refreshBtn").addEventListener("click", load);
