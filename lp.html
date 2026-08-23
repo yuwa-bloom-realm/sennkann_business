@@ -50,6 +50,8 @@
 
   /* ---- reveal ---- */
   .reveal{opacity:0;transform:translateY(18px);transition:opacity 1.1s ease,transform 1.1s ease}
+  /* 保険: JSが動かない/発火しない時(iOS Safari等)は最初から表示 */
+  html:not(.js-ok) .reveal{opacity:1;transform:none}
   .reveal.in{opacity:1;transform:none}
 
   /* ---- hero ---- */
@@ -386,6 +388,8 @@
 </footer>
 
 <script>
+  // JS生存フラグ。これが付いた時だけ .reveal を隠してアニメする
+  document.documentElement.classList.add('js-ok');
   const io = new IntersectionObserver((entries)=>{
     entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
   },{threshold:0.12, rootMargin:"0px 0px -8% 0px"});
@@ -393,11 +397,16 @@
     io.observe(el);
   });
   // hero stagger
-  window.addEventListener('load',()=>{
+  let heroShown=false;
+  function showHero(){
+    if(heroShown)return; heroShown=true;
     document.querySelectorAll('.hero .reveal').forEach((el,i)=>{
       setTimeout(()=>el.classList.add('in'), 180*i + 120);
     });
-  });
+  }
+  window.addEventListener('load',showHero);
+  // 画像が遅くてloadが来なくても、1.2秒後には必ず表示
+  setTimeout(showHero,1200);
   if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
     document.querySelectorAll('.reveal').forEach(el=>el.classList.add('in'));
   }
