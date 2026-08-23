@@ -178,13 +178,8 @@
     <p class="lead">それは<strong>「売るのが苦手」「発信が苦手」「自信がない」</strong>だけが原因とは限りません。</p>
     <p class="lead">21問で、今のあなたがどこで止まりやすいのか、そしてその少し手前に何が隠れているのかを見ていきます。</p>
     <p class="target">占い師・カウンセラー・セラピストなど、<br>人を支える仕事をしている方へ</p>
-    <div class="field">
-      <label for="name">LINEで使用しているお名前</label>
-      <p class="hint">診断結果との照合・ご連絡に使用します。</p>
-      <input type="text" id="name" placeholder="例）ゆわ" autocomplete="off">
-      <div class="err" id="nameErr"></div>
-    </div>
     <button class="btn" id="startBtn">診断をはじめる（全21問）</button>
+    <p class="hint" style="text-align:center;margin-top:14px">所要時間の目安：約3分</p>
   </section>
 
   <section id="quiz" class="panel hidden">
@@ -208,6 +203,26 @@
       <div class="orbit"></div>
       <p style="color:var(--ink-soft);font-family:var(--sans);letter-spacing:.1em">あなたの止まりポイントを読み解いています…</p>
     </div>
+  </section>
+
+  <section id="gate" class="panel hidden">
+    <div class="result-eyebrow">診断、おつかれさまでした</div>
+    <div class="divider"><span>✦</span></div>
+    <p class="lead" style="margin-bottom:10px">あなたの結果が、まとまりました。</p>
+    <p class="lead">結果をお届けする前に、お名前とメールアドレスを教えてください。</p>
+    <p class="lead" style="color:var(--gold)">診断結果に加えて、この先のあなたに必要な言葉を、<strong>7回に分けて</strong>お届けします🌙</p>
+    <div class="field">
+      <label for="gname">お名前</label>
+      <input type="text" id="gname" placeholder="例）ゆわ" autocomplete="name">
+      <div class="err" id="gnameErr"></div>
+    </div>
+    <div class="field" style="margin-top:16px">
+      <label for="gmail">メールアドレス</label>
+      <input type="text" id="gmail" placeholder="例）yuwa@example.com" autocomplete="email" inputmode="email">
+      <div class="err" id="gmailErr"></div>
+    </div>
+    <button class="btn" id="gateBtn">結果を見る</button>
+    <p class="hint" style="text-align:center;margin-top:14px">いつでも配信を止められます。安心してご登録ください。</p>
   </section>
 
   <section id="result" class="panel hidden">
@@ -242,8 +257,8 @@
       <h3>もっと「私の場合」を見てみたい方へ</h3>
       <p>診断は、答えを決めつけるためのものではありません。ここで見えたのは、今のあなたの“現在地”です。</p>
       <p class="future" id="rFuture"></p>
-      <p>「私の場合は、どこから整えればいい？」——その続きを、体験会で一緒に整理していきます。</p>
-      <a id="bookBtn" class="btn" href="#" target="_blank" rel="noopener">体験会の日程を見る</a>
+      <p>「私の場合は、どこから整えればいい？」——その続きを、個別相談で一緒に整理していきます。</p>
+      <a id="bookBtn" class="btn" href="#" target="_blank" rel="noopener">個別相談を予約する（無料）</a>
     </div>
 
     <p class="save-note" id="saveNote"></p>
@@ -257,7 +272,7 @@
 
 /* ▼▼▼ 設定値（既存を引き継ぎ）▼▼▼ */
 const GAS_URL  = "https://script.google.com/macros/s/AKfycbxNBXacdaDyD2RhSqofk1gFIhmnI5NpTH9Yppiv3obqAuzF2Dgai6BkemopU80JWdzR/exec";
-const BOOK_URL = "https://timerex.net/s/hinyarin1210_f06f/c3ae5a75";
+const BOOK_URL = "https://timerex.net/s/hinyarin1210_f06f/c2d4c09a";
 /* ▲▲▲ ここだけ入れ替えればOK ▲▲▲ */
 
 const CATS = {
@@ -344,25 +359,24 @@ const FUTURE = {
 };
 
 const $ = id => document.getElementById(id);
-const secCover=$("cover"), secQuiz=$("quiz"), secCalc=$("calc"), secResult=$("result");
+const secCover=$("cover"), secQuiz=$("quiz"), secCalc=$("calc"), secGate=$("gate"), secResult=$("result");
 const answers = {};
 let orderIdx = 0;
 let userName = "";
+let userEmail = "";
+let pendingResult = null;
 
 function show(sec){
-  [secCover,secQuiz,secCalc,secResult].forEach(s=>s.classList.add("hidden"));
+  [secCover,secQuiz,secCalc,secGate,secResult].forEach(s=>s.classList.add("hidden"));
   sec.classList.remove("hidden");
   sec.classList.remove("fade"); void sec.offsetWidth; sec.classList.add("fade");
   window.scrollTo({top:0,behavior:"smooth"});
 }
 
 $("startBtn").addEventListener("click", ()=>{
-  const v=$("name").value.trim();
-  if(!v){ $("nameErr").textContent="お名前を入力してください。"; return; }
-  $("nameErr").textContent=""; userName=v; orderIdx=0;
+  orderIdx=0;
   renderQuestion(); show(secQuiz);
 });
-$("name").addEventListener("keydown", e=>{ if(e.key==="Enter") $("startBtn").click(); });
 
 function renderQuestion(){
   const qid = QORDER[orderIdx];
@@ -420,10 +434,25 @@ function strengthLabel(v){
 function finish(){
   $("barFill").style.width="100%";
   show(secCalc);
-  const R=judge();
-  sendToGAS(R);
-  setTimeout(()=>renderResult(R), 1600);
+  pendingResult = judge();
+  // 計算演出のあと、結果の前にメール取得ゲートへ
+  setTimeout(()=>show(secGate), 1600);
 }
+
+/* メール取得ゲート */
+function isEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+$("gateBtn").addEventListener("click", ()=>{
+  const nm=$("gname").value.trim();
+  const ml=$("gmail").value.trim();
+  let ok=true;
+  if(!nm){ $("gnameErr").textContent="お名前を入力してください。"; ok=false; } else $("gnameErr").textContent="";
+  if(!isEmail(ml)){ $("gmailErr").textContent="メールアドレスの形式をご確認ください。"; ok=false; } else $("gmailErr").textContent="";
+  if(!ok) return;
+  userName=nm; userEmail=ml;
+  sendToGAS(pendingResult);      // 名前＋メール＋結果を記録・送信
+  renderResult(pendingResult);   // 結果表示
+});
+$("gmail").addEventListener("keydown", e=>{ if(e.key==="Enter") $("gateBtn").click(); });
 
 function renderResult(R){
   const c=CATS[R.first];
@@ -454,6 +483,7 @@ function sendToGAS(R){
   if(!GAS_URL || !GAS_URL.startsWith("http")) return;
   const payload={
     line_name:userName,
+    email:userEmail,
     answers: QORDER.reduce((o,q)=>{o["Q"+q]=answers[q];return o;},{}),
     cat_scores: R.s,
     primary: CATS[R.first].name,
@@ -467,7 +497,10 @@ function sendToGAS(R){
 
 $("restartBtn").addEventListener("click", ()=>{
   for(const k in answers) delete answers[k];
-  orderIdx=0; $("name").value=userName; show(secCover);
+  orderIdx=0; pendingResult=null;
+  $("gname").value=""; $("gmail").value="";
+  $("gnameErr").textContent=""; $("gmailErr").textContent="";
+  show(secCover);
 });
 </script>
 </body>
