@@ -74,6 +74,23 @@
   .funnel-step .fn-rate{flex:0 0 auto;font-size:.72rem;color:var(--teal-deep);background:var(--teal-soft);padding:3px 9px;border-radius:20px;font-weight:700}
   .foot-note{margin-top:24px;font-size:.72rem;color:var(--ink-dim);line-height:1.7;padding:14px 18px;background:var(--card);border:1px solid var(--line);border-radius:10px}
   .foot-note b{color:var(--teal-deep)}
+  /* セットアップ画面 */
+  .view{display:none}
+  .view.on{display:block}
+  .topnav a{cursor:pointer}
+  .setup-lead{font-size:.86rem;color:var(--ink-sub);margin-bottom:22px}
+  .link-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:14px}
+  @media(max-width:900px){.link-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.link-grid{grid-template-columns:1fr}}
+  .link-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:10px;transition:.15s;position:relative}
+  .link-card:hover{border-color:var(--teal);box-shadow:0 6px 20px rgba(15,181,176,.1);transform:translateY(-2px)}
+  .link-card .lc-ic{width:44px;height:44px;border-radius:10px;background:var(--teal-soft);display:grid;place-items:center;font-size:1.4rem}
+  .link-card .lc-title{font-size:.98rem;font-weight:700}
+  .link-card .lc-desc{font-size:.76rem;color:var(--ink-sub);line-height:1.6}
+  .link-card .lc-go{margin-top:auto;font-size:.78rem;color:var(--teal-deep);font-weight:700;display:flex;align-items:center;gap:5px}
+  .link-card.wip{opacity:.6}
+  .link-card.wip .lc-go{color:var(--ink-dim)}
+  .setup-section{font-size:.72rem;font-weight:700;letter-spacing:.1em;color:var(--ink-dim);margin:22px 0 12px}
 </style>
 </head>
 <body>
@@ -83,8 +100,8 @@
       <div class="name">OIKAKENAI<small>DASHBOARD</small></div>
     </div>
     <nav class="topnav">
-      <a href="#" class="on">ダッシュボード</a>
-      <a href="#">セットアップ</a>
+      <a data-view="dash" class="on">ダッシュボード</a>
+      <a data-view="setup">セットアップ</a>
     </nav>
     <div class="right">
       <span class="updated" id="updated">—</span>
@@ -92,6 +109,7 @@
     </div>
   </div>
   <div class="layout">
+    <div class="view on" id="view-dash">
     <div class="head-row">
       <h1 class="page">本日のようす</h1>
       <span class="date" id="dateStr">—</span>
@@ -174,10 +192,93 @@
     <div class="foot-note">
       <b>「自動」</b>＝診断データからリアルタイム表示中。<b>「連携待ち」</b>＝TimeRex・決済・アクセス解析をつなぐと、ここも自動で入ります（次のステップ）。
     </div>
-  </div>
+    </div><!-- /view-dash -->
+
+    <div class="view" id="view-setup">
+      <div class="head-row"><h1 class="page">セットアップ</h1></div>
+      <p class="setup-lead">各サービスへは、ここから直接ひらけます。Safariで探さなくて大丈夫🌙</p>
+
+      <div class="setup-section">つくる・公開する</div>
+      <div class="link-grid">
+        <a class="link-card" href="https://yuwa-bloom-realm.github.io/sennkann_business/" target="_blank" rel="noopener">
+          <div class="lc-ic">📝</div>
+          <div class="lc-title">診断をひらく</div>
+          <div class="lc-desc">今の診断を確認・テストする</div>
+          <div class="lc-go">ひらく →</div>
+        </a>
+        <a class="link-card" href="https://github.com/yuwa-bloom-realm/sennkann_business" target="_blank" rel="noopener">
+          <div class="lc-ic">🌐</div>
+          <div class="lc-title">GitHub（公開）</div>
+          <div class="lc-desc">診断・ダッシュボードのファイルを管理</div>
+          <div class="lc-go">ひらく →</div>
+        </a>
+        <a class="link-card" href="https://docs.google.com/spreadsheets/" target="_blank" rel="noopener">
+          <div class="lc-ic">📊</div>
+          <div class="lc-title">スプレッドシート</div>
+          <div class="lc-desc">診断の回答ログ・顧客リストを見る</div>
+          <div class="lc-go">ひらく →</div>
+        </a>
+      </div>
+
+      <div class="setup-section">つなぐ</div>
+      <div class="link-grid">
+        <a class="link-card" href="https://app.brevo.com/" target="_blank" rel="noopener">
+          <div class="lc-ic">📧</div>
+          <div class="lc-title">Brevo（メール配信）</div>
+          <div class="lc-desc">タイプ別・7日間メールを設定</div>
+          <div class="lc-go">ひらく →</div>
+        </a>
+        <a class="link-card" href="https://timerex.net/" target="_blank" rel="noopener">
+          <div class="lc-ic">📅</div>
+          <div class="lc-title">TimeRex（予約）</div>
+          <div class="lc-desc">個別相談の予約・Zoom自動発行</div>
+          <div class="lc-go">ひらく →</div>
+        </a>
+        <a class="link-card" href="https://squareup.com/" target="_blank" rel="noopener">
+          <div class="lc-ic">💳</div>
+          <div class="lc-title">決済（Square等）</div>
+          <div class="lc-desc">有料商品の決済（使う人だけ）</div>
+          <div class="lc-go">ひらく →</div>
+        </a>
+      </div>
+
+      <div class="setup-section">自動化（あとで・任意）</div>
+      <div class="link-grid">
+        <a class="link-card" href="https://zapier.com/" target="_blank" rel="noopener">
+          <div class="lc-ic">🔗</div>
+          <div class="lc-title">Zapier（連携）</div>
+          <div class="lc-desc">予約・入金をダッシュボードに自動反映</div>
+          <div class="lc-go">ひらく →</div>
+        </a>
+        <a class="link-card wip">
+          <div class="lc-ic">📈</div>
+          <div class="lc-title">アクセス解析</div>
+          <div class="lc-desc">診断ページのアクセス数（準備中）</div>
+          <div class="lc-go">準備中</div>
+        </a>
+        <a class="link-card" href="https://lin.ee/7AwQfBEf" target="_blank" rel="noopener">
+          <div class="lc-ic">💬</div>
+          <div class="lc-title">LINE（任意）</div>
+          <div class="lc-desc">希望者だけLINEも使うとき</div>
+          <div class="lc-go">ひらく →</div>
+        </a>
+      </div>
+    </div><!-- /view-setup -->
+  </div><!-- /layout -->
 <script>
   const GAS_URL = "https://script.google.com/macros/s/AKfycbxNBXacdaDyD2RhSqofk1gFIhmnI5NpTH9Yppiv3obqAuzF2Dgai6BkemopU80JWdzR/exec";
   const $ = id => document.getElementById(id);
+
+  // タブ切り替え
+  document.querySelectorAll(".topnav a").forEach(function(a){
+    a.addEventListener("click", function(){
+      document.querySelectorAll(".topnav a").forEach(x=>x.classList.remove("on"));
+      a.classList.add("on");
+      var v = a.getAttribute("data-view");
+      $("view-dash").classList.toggle("on", v==="dash");
+      $("view-setup").classList.toggle("on", v==="setup");
+    });
+  });
   function dateLabel(){
     const d=new Date(), w=["日","月","火","水","木","金","土"][d.getDay()];
     return d.getFullYear()+"年"+(d.getMonth()+1)+"月"+d.getDate()+"日（"+w+"）";
