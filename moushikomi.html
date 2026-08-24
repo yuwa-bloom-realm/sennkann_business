@@ -1,0 +1,254 @@
+<!-- ★追いかけない集客 無料オンライン説明会 申込フォーム★ -->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<title>お申し込み｜追いかけない集客のつくりかた（無料オンライン説明会）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    color-scheme:light only;
+    --bg:#FBFAF7;
+    --bg-alt:#F3EFE8;
+    --ink:#2A2724;
+    --ink-deep:#1F1B16;
+    --ink-soft:#6B655C;
+    --gold:#8C7A5B;
+    --line:#E3DDD2;
+    --serif:'Shippori Mincho',serif;
+    --sans:'Noto Sans JP',sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;background:#FBFAF7}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-weight:300;
+    line-height:2;
+    -webkit-font-smoothing:antialiased;
+    font-feature-settings:"palt";
+  }
+  .wrap{max-width:620px;margin:0 auto;padding:0 28px}
+
+  /* header */
+  .top{padding:64px 0 40px;text-align:center}
+  .eyebrow{font-family:var(--sans);font-size:.72rem;letter-spacing:.32em;color:var(--gold);font-weight:500;text-transform:uppercase}
+  h1{font-family:var(--serif);font-weight:500;line-height:1.7;letter-spacing:.02em;font-size:1.5rem;margin:18px 0 14px}
+  .top p{font-size:.94rem;color:var(--ink-soft);letter-spacing:.02em}
+
+  /* form */
+  form{padding-bottom:80px}
+  .field{margin-bottom:34px}
+  label.q{display:block;font-family:var(--sans);font-weight:500;font-size:.96rem;color:var(--ink-deep);margin-bottom:4px;letter-spacing:.02em;line-height:1.7}
+  .req{color:var(--gold);font-size:.74rem;margin-left:8px;letter-spacing:.1em}
+  .opt{color:var(--ink-soft);font-size:.74rem;margin-left:8px;letter-spacing:.1em}
+  .hint{font-size:.8rem;color:var(--ink-soft);margin-bottom:10px;line-height:1.7}
+  input[type=text],input[type=email],textarea,select{
+    width:100%;font-family:var(--sans);font-weight:300;font-size:1rem;color:var(--ink);
+    background:#fff;border:1px solid var(--line);border-radius:2px;padding:14px 16px;
+    line-height:1.7;transition:border-color .3s ease;
+  }
+  input:focus,textarea:focus,select:focus{outline:none;border-color:var(--gold)}
+  textarea{resize:vertical;min-height:92px}
+  select{appearance:none;background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%238C7A5B' d='M6 8L0 0h12z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center}
+
+  /* radio group */
+  .choices{display:flex;flex-direction:column;gap:0;border:1px solid var(--line);border-radius:2px;overflow:hidden;background:#fff}
+  .choices label{display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer;border-top:1px solid var(--line);font-size:.96rem;color:var(--ink);transition:background .2s ease}
+  .choices label:first-child{border-top:none}
+  .choices label:hover{background:var(--bg-alt)}
+  .choices input{accent-color:var(--gold);width:17px;height:17px;flex-shrink:0}
+
+  /* divider */
+  .sec-label{font-family:var(--serif);font-size:1.05rem;color:var(--ink-deep);margin:52px 0 24px;padding-bottom:12px;border-bottom:1px solid var(--line);letter-spacing:.04em}
+
+  /* notice box */
+  .notice{background:var(--bg-alt);border:1px solid var(--line);border-radius:2px;padding:26px 24px;margin:44px 0 30px}
+  .notice h3{font-family:var(--serif);font-size:1.02rem;color:var(--ink-deep);margin-bottom:14px;letter-spacing:.03em}
+  .notice ul{list-style:none;padding:0}
+  .notice li{font-size:.9rem;color:var(--ink);line-height:1.9;padding-left:20px;position:relative}
+  .notice li::before{content:"—";position:absolute;left:0;color:var(--gold)}
+  .agree{display:flex;align-items:flex-start;gap:12px;margin-top:6px;padding:16px 4px;cursor:pointer}
+  .agree input{accent-color:var(--gold);width:19px;height:19px;flex-shrink:0;margin-top:3px}
+  .agree span{font-size:.92rem;color:var(--ink-deep);font-weight:500;line-height:1.7}
+
+  /* submit */
+  .cta{display:block;width:100%;font-family:var(--sans);font-weight:400;letter-spacing:.14em;font-size:1rem;color:var(--bg);background:var(--ink-deep);padding:22px;border:none;border-radius:2px;cursor:pointer;transition:background .4s ease,transform .4s ease;box-shadow:0 10px 30px rgba(31,27,22,0.16)}
+  .cta:hover{background:var(--gold);transform:translateY(-2px)}
+  .cta:disabled{opacity:.5;cursor:not-allowed;transform:none}
+
+  /* states */
+  .msg{display:none;text-align:center;padding:60px 0}
+  .msg h2{font-family:var(--serif);font-size:1.3rem;color:var(--ink-deep);margin-bottom:18px;line-height:1.7}
+  .msg p{font-size:.94rem;color:var(--ink-soft);line-height:2}
+  .err{color:#a3432f;font-size:.86rem;margin-top:16px;text-align:center;display:none}
+
+  @media(max-width:480px){
+    h1{font-size:1.3rem}
+    .top{padding:48px 0 32px}
+    .wrap{padding:0 22px}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="top">
+    <span class="eyebrow">無料オンライン説明会</span>
+    <h1>追いかけない集客の<br>つくりかた</h1>
+    <p>ご参加のお申し込みは、こちらから。<br>いただいた内容は、当日よりよい時間にするために拝見します。</p>
+  </div>
+
+  <form id="applyForm">
+
+    <div class="field">
+      <label class="q">お名前（本名）<span class="req">必須</span></label>
+      <div class="hint">当日は本名でのご参加をお願いしています。</div>
+      <input type="text" name="name" required>
+    </div>
+
+    <div class="field">
+      <label class="q">メールアドレス<span class="req">必須</span></label>
+      <div class="hint">こちらに、日程とZoomのご案内をお送りします。</div>
+      <input type="email" name="email" required>
+    </div>
+
+    <div class="field">
+      <label class="q">ご希望の日程<span class="req">必須</span></label>
+      <div class="choices">
+        <label><input type="radio" name="schedule" value="8/26(水) 13:00〜" required> 8月26日(水) 13:00〜</label>
+        <label><input type="radio" name="schedule" value="8/27(木) 13:00〜"> 8月27日(木) 13:00〜</label>
+        <label><input type="radio" name="schedule" value="8/29(土) 13:00〜"> 8月29日(土) 13:00〜</label>
+        <label><input type="radio" name="schedule" value="いずれも都合が合わない"> いずれも都合が合わない</label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="q">上の日程が合わない場合<span class="opt">任意</span></label>
+      <div class="hint">参加できそうな日時があれば、お書きください。次回のご案内に活かします。</div>
+      <textarea name="alt_schedule" placeholder="例：平日の夜、土日の午前中 など"></textarea>
+    </div>
+
+    <div class="sec-label">お仕事について</div>
+
+    <div class="field">
+      <label class="q">今のお仕事の内容<span class="req">必須</span></label>
+      <div class="hint">占い・カウンセリング・セラピーなど、今されていることを教えてください。</div>
+      <textarea name="job" required></textarea>
+    </div>
+
+    <div class="field">
+      <label class="q">今の状況に近いもの<span class="req">必須</span></label>
+      <div class="choices">
+        <label><input type="radio" name="stage" value="まだ始めたばかり" required> まだ始めたばかり</label>
+        <label><input type="radio" name="stage" value="少し売上をあげたことがある"> 少し売上をあげたことがある</label>
+        <label><input type="radio" name="stage" value="しっかり売上の実績がある"> しっかり売上の実績がある</label>
+        <label><input type="radio" name="stage" value="これから始めたい"> これから始めたい</label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="q">今、どんな悩みがありますか<span class="req">必須</span></label>
+      <textarea name="worry" required></textarea>
+    </div>
+
+    <div class="sec-label">これまでのこと</div>
+
+    <div class="field">
+      <label class="q">これまで、集客の自動化システムを<br>使ったことはありますか<span class="req">必須</span></label>
+      <div class="choices">
+        <label><input type="radio" name="used_before" value="使ったことがある（今も使っている）" required> 使ったことがある（今も使っている）</label>
+        <label><input type="radio" name="used_before" value="使ったことがある（今は使っていない）"> 使ったことがある（今は使っていない）</label>
+        <label><input type="radio" name="used_before" value="使ったことがない"> 使ったことがない</label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="q">（今も使っている方へ）<br>なぜ今回、これに参加しようと<br>思われましたか<span class="opt">任意</span></label>
+      <textarea name="why_join" placeholder="該当する方のみ"></textarea>
+    </div>
+
+    <div class="field">
+      <label class="q">（今は使っていない方へ）<br>なぜ使わなくなったのですか<span class="opt">任意</span></label>
+      <textarea name="why_quit" placeholder="該当する方のみ"></textarea>
+    </div>
+
+    <div class="field">
+      <label class="q">これから、どんなふうに<br>お仕事をしていきたいですか<span class="req">必須</span></label>
+      <textarea name="future" required></textarea>
+    </div>
+
+    <div class="notice">
+      <h3>ご参加にあたって</h3>
+      <ul>
+        <li>本名・顔出しでのご参加をお願いします。</li>
+        <li>今回は、本気で取り組みたい方のための会です。</li>
+        <li>冷やかし・情報収集だけの方のご参加はご遠慮ください。</li>
+      </ul>
+    </div>
+
+    <label class="agree">
+      <input type="checkbox" name="agree" required>
+      <span>上記に同意し、本名・顔出しで参加します。</span>
+    </label>
+
+    <button type="submit" class="cta" id="submitBtn">この内容で申し込む</button>
+    <div class="err" id="errMsg">送信に失敗しました。通信環境をご確認のうえ、もう一度お試しください。</div>
+
+  </form>
+
+  <div class="msg" id="doneMsg">
+    <h2>お申し込みを<br>受け付けました</h2>
+    <p>ご登録のメールアドレスに、<br>日程とZoomのご案内をお送りしました。<br><br>迷惑メールフォルダに届くことがあります。<br>見当たらない場合は、そちらもご確認ください。<br><br>当日、お会いできるのを楽しみにしています。</p>
+  </div>
+
+</div>
+
+<script>
+  // ▼▼▼ ここにGASのデプロイURLを貼る ▼▼▼
+  const GAS_URL = "https://script.google.com/macros/s/AKfycbz1XxqaEMRqku_pI0PNmxjvfHcN_AoGuXHXzE9zaw2xnfUBG0lCqDktRXl9SRqYwz4C0w/exec";
+  // ▲▲▲ ここだけ入れ替えればOK ▲▲▲
+
+  const form = document.getElementById('applyForm');
+  const btn = document.getElementById('submitBtn');
+  const errMsg = document.getElementById('errMsg');
+  const doneMsg = document.getElementById('doneMsg');
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    errMsg.style.display = 'none';
+    btn.disabled = true;
+    btn.textContent = '送信しています…';
+
+    const data = {};
+    new FormData(form).forEach(function(v,k){ data[k] = v; });
+    data.agree = form.agree.checked ? "同意" : "";
+    data.created_at = new Date().toISOString();
+
+    fetch(GAS_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {'Content-Type':'text/plain;charset=utf-8'},
+      body: JSON.stringify(data)
+    })
+    .then(function(){
+      form.style.display = 'none';
+      doneMsg.style.display = 'block';
+      window.scrollTo({top:0, behavior:'smooth'});
+    })
+    .catch(function(){
+      btn.disabled = false;
+      btn.textContent = 'この内容で申し込む';
+      errMsg.style.display = 'block';
+    });
+  });
+</script>
+
+</body>
+</html>
